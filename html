@@ -1,0 +1,262 @@
+<div class="vehicle-container">
+    <!--Add new vehicle Form-->
+    <div class="container newVehicleForm" *ngIf="addVehicleClick">
+        <div>
+            <h2>New Vehicle</h2>
+        </div>
+        <form [formGroup]="vehicleForm" (ngSubmit)="insertVehicle()">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="phoneNumber" class="control-label">Vehicle Number</label>
+                    <div>
+                        <input type="text" placeholder="Vehicle Number" class="form-control"
+                            formControlName="vehicleNumber">
+                    </div>
+                    <div
+                        *ngIf="vehicleForm.controls['vehicleNumber'].errors && (vehicleForm.controls['vehicleNumber'].dirty || vehicleForm.controls['vehicleNumber'].touched)">
+                        <div *ngIf="!vehicleForm.controls['vehicleNumber'].errors?.['required']" class="red">Vehicle
+                            Number
+                            should be present, please check</div>
+                        <div *ngIf="!vehicleForm.controls['vehicleNumber'].errors?.['pattern']" class="red">Vehicle
+                            Number
+                            is
+                            not
+                            in valid format, please check</div>
+                    </div>
+                </div>
+
+                <div class="form-group  col-md-6">
+                    <label for="phoneNumber" class="control-label">Vehicle Name</label>
+                    <div>
+                        <select class="form-control" formControlName="vehicleName">
+                            <option value="Tower crane">Tower crane</option>
+                            <option value="FirePlace Crane">FirePlace Crane</option>
+                            <option value="Double treadwheel Crane">Double treadwheel Crane</option>
+                            <option value="Crawler Crane">Crawler Crane</option>
+                            <option value="Aerial Crane">Aerial Crane</option>
+                            <option value="Deck Crane">Deck Crane</option>
+                        </select>
+                    </div>
+                    <div
+                        *ngIf="vehicleForm.controls['vehicleName'].errors && (vehicleForm.controls['vehicleName'].dirty || vehicleForm.controls['vehicleName'].touched)">
+                        <div [hidden]="!vehicleForm.controls['vehicleName'].errors?.['required']" class="red">Vehicle
+                            name
+                            should be
+                            present, please check</div>
+                        <div [hidden]="!vehicleForm.controls['vehicleName'].errors?.['maxlength']" class="red">Invalid
+                            Vehicle
+                            name,
+                            please check</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="phoneNumber" class="control-label">Max Lifting Capacity</label>
+                    <div>
+                        <input type="number" placeholder="MaxLiftingCapacity" class="form-control"
+                            formControlName="maxLiftingCapacity">
+                    </div>
+                    <div
+                        *ngIf="vehicleForm.controls['maxLiftingCapacity'].errors && (vehicleForm.controls['maxLiftingCapacity'].dirty || vehicleForm.controls['maxLiftingCapacity'].touched)">
+                        <div [hidden]="!vehicleForm.controls['maxLiftingCapacity'].errors?.['required']" class="red">
+                            Vehicle
+                            Maximum
+                            Lifting capacity should be present, please check</div>
+                        <div [hidden]="!vehicleForm.controls['maxLiftingCapacity'].errors?.['pattern']" class="red">
+                            Vehicle
+                            Maximum
+                            Lifting capacity should be a Integer</div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="phoneNumber" class="control-label">Retire Date</label>
+                    <div>
+                        <input type="date" placeholder="Retire Date" class="form-control" formControlName="retireDate">
+                    </div>
+                    <div
+                        *ngIf="vehicleForm.controls['retireDate'].errors && (vehicleForm.controls['retireDate'].dirty || vehicleForm.controls['retireDate'].touched)">
+                        <div [hidden]="!vehicleForm.controls['retireDate'].errors?.['required']" class="red">Vehicle
+                            Retire
+                            Date
+                            should
+                            be present, please check</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="phoneNumber" class="control-label">Vehicle Status</label>
+                    <div>
+                        <select class="form-control" formControlName="vehicleStatus">
+                            <option value="Active">Active</option>
+                            <option value="Retired">Retired</option>
+                            <option value="InProgress">InProgress</option>
+                        </select>
+                    </div>
+                    <div
+                        *ngIf="vehicleForm.controls['vehicleStatus'].errors && (vehicleForm.controls['vehicleStatus'].dirty || vehicleForm.controls['vehicleStatus'].touched)">
+                        <div [hidden]="!vehicleForm.controls['vehicleStatus'].errors?.['required']" class="red">Vehicle
+                            Status
+                            should be
+                            present, please check</div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="phoneNumber" class="control-label">Harbor Location</label>
+                    <div>
+                        <input type="text" placeholder="Harbor Location" class="form-control"
+                            formControlName="harborLocation">
+                    </div>
+                    <div
+                        *ngIf="vehicleForm.controls['harborLocation'].errors && (vehicleForm.controls['harborLocation'].dirty || vehicleForm.controls['harborLocation'].touched)">
+                        <div [hidden]="!vehicleForm.controls['harborLocation'].errors?.['required']" class="red">Harbor
+                            Location
+                            should
+                            be present, please check</div>
+                        <div *ngIf="vehicleForm.controls['harborLocation'].errors?.['minlength'] || vehicleForm.controls['harborLocation'].errors?.['maxlength']"
+                            class="red">harbor location should be between 5 to 25 characters</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="phoneNumber" class="control-label">Country</label>
+                    <div>
+                        <input type="text" placeholder="Country" class="form-control" formControlName="country">
+                    </div>
+                    <div
+                        *ngIf="vehicleForm.controls['country'].errors && (vehicleForm.controls['country'].dirty || vehicleForm.controls['country'].touched)">
+                        <div [hidden]="!vehicleForm.controls['country'].errors?.['required']" class="red">Country should
+                            be
+                            present,
+                            please check</div>
+                        <div *ngIf="vehicleForm.controls['country'].errors?.['minlength'] || vehicleForm.controls['country'].errors?.['maxlength']"
+                            class="red">Country should be between 5 to 25 characters</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <button type="button" class="btn btn-basic cancelButton"
+                        (click)="fetchAllVehicles()">Cancel</button>
+                    <button type="submit" class="action-btn-black" [disabled]="!vehicleForm.valid">Add</button>
+                </div>
+            </div>
+        </form>
+        <br /><br /><br />
+        <div *ngIf="isError" class="errorRed">
+            <p>{{errorMessage}}</p>
+        </div>
+    </div>
+
+    <div class="container newVehicleForm" *ngIf="!addVehicleClick && updateStatus">
+        <div style="margin-bottom: 20px;border-bottom: 1px solid black">
+            <h2>Update Status - Vehicle Number: {{vehicleNum}}</h2>
+        </div>
+        <form [formGroup]="vehicleStatusForm" class="form-horizontal" (ngSubmit)="updateVehicleStatus()">
+            <div class="form-group">
+                <label for="phoneNumber" class="col-sm-5 control-label">Current Status :</label>
+                <div class="col-sm-7">
+                    <input type="text" disabled value="{{vehicleStatus}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber" class="col-sm-5 control-label">New Status : </label>
+                <div class="col-sm-7">
+                    <select class="form-control" formControlName="vehicleStatus">
+                        <option value="Active">Active</option>
+                        <option value="InActive">Retired</option>
+                        <option value="InProgress">InProgress</option>
+                    </select>
+                </div>
+            </div>
+            <button type="button" class="btn btn-basic cancelButton" (click)="fetchAllVehicles()">Cancel</button>
+            <button type="submit" class="btn btn-primary updateButton"
+                [disabled]="!vehicleStatusForm.valid">Update</button>
+            <br /><br /><br />
+            <div *ngIf="isData" class="green">{{updateSuccess}}</div>
+            <div *ngIf="isError" class="errorRed">{{errorMessage}}</div>
+        </form>
+
+    </div>
+
+    <!--List of Vehicle table-->
+    <div class="card card-container" *ngIf="!addVehicleClick && !updateStatus">
+        <!-- <h2>Vehicle<a><span class="glyphicon glyphicon-plus floatRight" (click)="renderAddForm()"></span></a></h2> -->
+        <!-- <h2>Vehicle</h2><button (click)="renderAddForm()" class="action-btn" [ngStyle]="{width: '150px'}">Add</button> -->
+        <h2 (click)="renderAddForm()"> Vehicle
+            <a>
+                <button class="btn btn-outline-primary floatRight">Add Vehicle</button>
+            </a>
+        </h2>
+        <br>
+        <div class="input-group inputSearchGroup">
+            <input type="text" class="form-control" placeholder="Search by Vehicle Name" [(ngModel)]="vehicleName">
+            <div class="input-group-btn">
+                <button class="btn btn-outline-primary marginRight" type="submit" (click)="fetchVehicleByName()">
+                    <!-- <i class="glyphicon glyphicon-search"></i> -->
+                    Search
+                </button>
+            </div>
+            <input type="text" class="form-control" placeholder="Search by Vehicle Number" [(ngModel)]="vehicleNum">
+            <div class="input-group-btn">
+                <button class="btn btn-outline-primary" type="submit" (click)="fetchVehicleByNumber()">
+                    <!-- <i class="glyphicon glyphicon-search"></i> -->
+                    Search
+                </button>
+            </div>
+        </div>
+        <br>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Vehicle Number</th>
+                    <th>Vehicle Name</th>
+                    <th>Max Lifting Capacity</th>
+                    <th>Retire Date</th>
+                    <th>Vehicle Status</th>
+                    <th>Harbour Locations</th>
+                    <th>Country</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="!isError">
+                <tr *ngFor="let vehicle of vehicles">
+                    <td>{{vehicle.vehicleNumber}}</td>
+                    <td>{{vehicle.vehicleName}}</td>
+                    <td>{{vehicle.maxLiftingCapacity}}</td>
+                    <td>{{vehicle.retireDate | date}}</td>
+                    <td>{{vehicle.vehicleStatus}}</td>
+                    <td>{{vehicle.harborLocation}}</td>
+                    <td>{{vehicle.country}}</td>
+                    <td class="text-center">
+                        <!-- <a ><span class="glyphicon glyphicon-remove marginRight"></span></a> -->
+                        <button class="btn btn-outline-primary marginRight" type="submit"
+                            (click)="removeVehicle(vehicle.vehicleNumber)">
+                            <!-- <i class="glyphicon glyphicon-remove"></i> -->
+                            Delete
+                        </button>
+                        <button class="btn btn-outline-primary marginRight" type="submit"
+                            (click)="renderStatusForm(vehicle.vehicleNumber,vehicle.vehicleStatus)">
+                            <!-- <i class="glyphicon glyphicon-pencil"></i> -->
+                            Edit
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="isError">
+                <tr>
+                    <td colspan="7" style="text-align: center;" class="errorRed">{{errorMessage}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
